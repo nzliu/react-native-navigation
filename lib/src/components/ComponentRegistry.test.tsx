@@ -42,4 +42,10 @@ describe('ComponentRegistry', () => {
       mockedStore.setComponentClassForName('example.MyComponent.name', anyFunction())
     ).called();
   });
+
+  it('should not invoke generator', () => {
+    const generator: ComponentProvider = jest.fn(() => DummyComponent);
+    uut.registerComponent('example.MyComponent.name', generator);
+    expect(generator).toHaveBeenCalledTimes(0);
+  });
 });
